@@ -38,10 +38,9 @@ public class UsuarioEntity implements Serializable {
     private String password;
     
     private String email;
-    private Integer descuento;
     
     @ManyToOne(fetch=FetchType.EAGER, cascade={CascadeType.REFRESH})
-    @JoinColumn(name="id_tipousuario")
+    @JoinColumn(name="tipousuario_id")
     private TipousuarioEntity tipousuario;
     
     @JsonIgnore
