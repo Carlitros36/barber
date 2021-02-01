@@ -43,6 +43,9 @@ public class UsuarioEntity implements Serializable {
     @JoinColumn(name="tipousuario_id")
     private TipousuarioEntity tipousuario;
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = {CascadeType.REFRESH})
+    private List<CitaEntity> citas = new ArrayList<>();
+    
     @JsonIgnore
     private String token;
     @JsonIgnore
@@ -136,7 +139,7 @@ public class UsuarioEntity implements Serializable {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-
+    
     public TipousuarioEntity getTipousuario() {
         return tipousuario;
     }
@@ -144,10 +147,15 @@ public class UsuarioEntity implements Serializable {
     public void setTipousuario(TipousuarioEntity tipousuario) {
         this.tipousuario = tipousuario;
     }
+    
+    public int getCitas() {
+        return citas.size();
+    }
 
     @Override
     public String toString() {
         return "Usuario [id=" + id + ",nombre=" + nombre + ",apellido1=" + apellido1 + ",login=" + login
                 + ",email=" + email + "]";
     }
+
 }
