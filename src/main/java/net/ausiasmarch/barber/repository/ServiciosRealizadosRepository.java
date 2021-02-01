@@ -5,10 +5,20 @@
  */
 package net.ausiasmarch.barber.repository;
 
+import net.ausiasmarch.barber.entity.ServiciosRealizadosEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+
 /**
  *
  * @author Carlos
  */
 public interface ServiciosRealizadosRepository {
     
+    @Query(value = "SELECT * FROM ServiciosRealizados s WHERE s.servicios_id = :id_servicios", nativeQuery = true)
+    Page<ServiciosRealizadosEntity> findByServiciosRealizadosXServicios(Long id_servicios, Pageable pageable);
+    
+    @Query(value = "SELECT * FROM ServiciosRealizados s WHERE s.cita_id = :id_cita", nativeQuery = true)
+    Page<ServiciosRealizadosEntity> findByServiciosRealizadosXCita(Long id_cita, Pageable pageable);
 }

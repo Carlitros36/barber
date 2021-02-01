@@ -5,10 +5,17 @@
  */
 package net.ausiasmarch.barber.repository;
 
+import net.ausiasmarch.barber.entity.CitaEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+
 /**
  *
  * @author Carlos
  */
 public interface CitaRepository {
     
+    @Query(value = "SELECT * FROM cita c WHERE c.usuario_id = :id_usuario", nativeQuery = true)
+    Page<CitaEntity> findByCitaXUsuario(Long id_usuario, Pageable pageable);
 }

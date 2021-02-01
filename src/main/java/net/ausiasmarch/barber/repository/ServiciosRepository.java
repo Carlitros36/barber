@@ -5,10 +5,15 @@
  */
 package net.ausiasmarch.barber.repository;
 
+import java.util.List;
+import net.ausiasmarch.barber.entity.ServiciosEntity;
+
 /**
  *
  * @author Carlos
  */
 public interface ServiciosRepository {
     
+    List<ServiciosEntity> findTop5ByOrderByPrecioDesc();
+
 }

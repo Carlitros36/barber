@@ -5,10 +5,15 @@
  */
 package net.ausiasmarch.barber.repository;
 
+import java.util.List;
+import net.ausiasmarch.barber.entity.InventarioEntity;
+
+
 /**
  *
  * @author Carlos
  */
 public interface InventarioRepository {
     
+    List<InventarioEntity> findTop10ByOrderByExistenciasDesc();
 }
