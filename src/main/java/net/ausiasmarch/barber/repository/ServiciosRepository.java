@@ -7,12 +7,13 @@ package net.ausiasmarch.barber.repository;
 
 import java.util.List;
 import net.ausiasmarch.barber.entity.ServiciosEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Carlos
  */
-public interface ServiciosRepository {
+public interface ServiciosRepository extends JpaRepository<ServiciosEntity, Long>{
     
     List<ServiciosEntity> findTop5ByOrderByPrecioDesc();
 

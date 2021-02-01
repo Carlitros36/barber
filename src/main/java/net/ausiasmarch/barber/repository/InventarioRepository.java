@@ -7,13 +7,14 @@ package net.ausiasmarch.barber.repository;
 
 import java.util.List;
 import net.ausiasmarch.barber.entity.InventarioEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
 /**
  *
  * @author Carlos
  */
-public interface InventarioRepository {
+public interface InventarioRepository extends JpaRepository<InventarioEntity, Long>{
     
     List<InventarioEntity> findTop10ByOrderByExistenciasDesc();
 }

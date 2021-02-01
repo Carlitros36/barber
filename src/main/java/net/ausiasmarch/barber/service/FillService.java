@@ -2,8 +2,11 @@ package net.ausiasmarch.barber.service;
 
 import java.time.ZoneId;
 import java.util.Optional;
+import net.ausiasmarch.barber.entity.CitaEntity;
 import net.ausiasmarch.barber.entity.TipousuarioEntity;
 import net.ausiasmarch.barber.entity.UsuarioEntity;
+import net.ausiasmarch.barber.helper.RandomHelper;
+import net.ausiasmarch.barber.repository.CitaRepository;
 import net.ausiasmarch.barber.repository.TipousuarioRepository;
 import net.ausiasmarch.barber.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ public class FillService {
 
     @Autowired
     UsuarioRepository oUsuarioRepository;
+    
+    @Autowired
+    CitaRepository oCitaRepository;
 
     public Long tipousuarioFill() {
 
@@ -65,4 +71,17 @@ public class FillService {
         return cantidad;
     }
 
+    public Long citaFill(Long cantidad) {
+
+        for (int i = 1; i <= cantidad; i++) {
+            CitaEntity oCitaEntity = new CitaEntity();
+            oCitaEntity.setFecha(RandomHelper.getRadomDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());          
+            Optional<UsuarioEntity> optionalUsuarioEntity = oUsuarioRepository.findById(Long.valueOf(RandomHelper.getRandomInt(1, 100)));
+            UsuarioEntity oUsuarioEntity = optionalUsuarioEntity.get();                          
+            oCitaEntity.setUsuario(oUsuarioEntity);
+            oCitaRepository.save(oCitaEntity);
+        }
+        return cantidad;
+
+    }
 }
