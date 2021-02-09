@@ -62,9 +62,9 @@ public class FillService {
             TipousuarioEntity oTipousuarioEntity = new TipousuarioEntity();
             oTipousuarioEntity.setId(2L);
             oUsuarioEntity.setTipousuario(oTipousuarioEntity);
-            oUsuarioEntity.setToken("");
+            /*oUsuarioEntity.setToken("");
             oUsuarioEntity.setValidado(true);
-            oUsuarioEntity.setActivo(true);
+            oUsuarioEntity.setActivo(true);*/
 
             oUsuarioRepository.save(oUsuarioEntity);
         }

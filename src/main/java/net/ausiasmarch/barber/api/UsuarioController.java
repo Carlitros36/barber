@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -56,7 +58,7 @@ public class UsuarioController {
                     return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.getOne(id), HttpStatus.NOT_FOUND);
                 }
             } else {  //cliente
-                if (id.equals(oUsuarioEntity.getId())) {  //los datos pedidos por el cliente son sus propios datos?
+                if (id.equals(oUsuarioEntity.getId())) {  //cliente
                     return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.getOne(id), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
@@ -96,8 +98,8 @@ public class UsuarioController {
             if (oUsuarioEntity.getTipousuario().getId() == 1) {
                 if (oNewUsuarioEntity.getId() == null) {
                     oNewUsuarioEntity.setPassword("da8ab09ab4889c6208116a675cad0b13e335943bd7fc418782d054b32fdfba04");
-                    oNewUsuarioEntity.setActivo(false);
-                    oNewUsuarioEntity.setValidado(false);
+                   /* oNewUsuarioEntity.setActivo(false);
+                    oNewUsuarioEntity.setValidado(false);*/
                     return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.save(oNewUsuarioEntity), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<Long>(0L, HttpStatus.NOT_MODIFIED);
@@ -177,9 +179,9 @@ public class UsuarioController {
                 if (oUsuarioRepository.existsById(id)) {
                     UsuarioEntity oUsuarioEntity3 = oUsuarioRepository.getOne(id);
                     oUsuarioEntity.setPassword(oUsuarioEntity3.getPassword());
-                    oUsuarioEntity.setToken(oUsuarioEntity3.getToken());
+                   /* oUsuarioEntity.setToken(oUsuarioEntity3.getToken());
                     oUsuarioEntity.setActivo(oUsuarioEntity3.isActivo());
-                    oUsuarioEntity.setValidado(oUsuarioEntity3.isValidado());
+                    oUsuarioEntity.setValidado(oUsuarioEntity3.isValidado());*/
                     return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.save(oUsuarioEntity), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.getOne(id), HttpStatus.NOT_FOUND);
@@ -188,9 +190,9 @@ public class UsuarioController {
                 if (oUsuarioEntity2.getId() == id) {
                     UsuarioEntity oUsuarioEntity3 = oUsuarioRepository.getOne(id);
                     oUsuarioEntity.setPassword(oUsuarioEntity3.getPassword());
-                    oUsuarioEntity.setToken(oUsuarioEntity3.getToken());
+                  /*oUsuarioEntity.setToken(oUsuarioEntity3.getToken());
                     oUsuarioEntity.setActivo(oUsuarioEntity3.isActivo());
-                    oUsuarioEntity.setValidado(oUsuarioEntity3.isValidado());
+                    oUsuarioEntity.setValidado(oUsuarioEntity3.isValidado());*/
                     return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.save(oUsuarioEntity), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);

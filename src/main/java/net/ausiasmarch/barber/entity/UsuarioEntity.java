@@ -46,13 +46,13 @@ public class UsuarioEntity implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = {CascadeType.REFRESH})
     private List<CitaEntity> citas = new ArrayList<>();
     
-    @JsonIgnore
+    /*@JsonIgnore
     private String token;
     @JsonIgnore
     private boolean validado;
     @JsonIgnore
     private boolean activo;
-
+    */
     public UsuarioEntity() {
     }
 
@@ -116,7 +116,7 @@ public class UsuarioEntity implements Serializable {
         this.email = email;
     }
 
-    public String getToken() {
+  /*  public String getToken() {
         return token;
     }
 
@@ -139,7 +139,7 @@ public class UsuarioEntity implements Serializable {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
+    */
     public TipousuarioEntity getTipousuario() {
         return tipousuario;
     }
