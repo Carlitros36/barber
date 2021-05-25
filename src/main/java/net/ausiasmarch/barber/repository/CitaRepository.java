@@ -5,6 +5,7 @@
  */
 package net.ausiasmarch.barber.repository;
 
+import java.util.List;
 import net.ausiasmarch.barber.entity.CitaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,9 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface CitaRepository extends JpaRepository<CitaEntity, Long>{
     
-    @Query(value = "SELECT * FROM cita c WHERE c.usuario_id = :id_usuario", nativeQuery = true)
+    /*@Query(value = "SELECT * FROM cita c WHERE c.usuario_id = :id_usuario", nativeQuery = true)
     Page<CitaEntity> findByCitaXUsuario(Long id_usuario, Pageable pageable);
+    */
+    @Query(value = "SELECT * FROM cita c WHERE c.usuario_id = :id_usuario", nativeQuery = true)
+    List<CitaEntity> findByCitaXUsuario(Long id_usuario);
 }

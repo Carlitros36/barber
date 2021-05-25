@@ -89,7 +89,7 @@ public class CitaController {
                     return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
                 }
             } else {
-                return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<List<CitaEntity>>(oCitaRepository.findByCitaXUsuario(oUsuarioEntity.getId()), HttpStatus.OK);
             }
         }
     }
@@ -129,7 +129,7 @@ public class CitaController {
         }
     }
     
-    @PostMapping("/fill/{amount}")
+    /*@PostMapping("/fill/{amount}")
     public ResponseEntity<?> fill(@PathVariable(value = "amount") Long amount) {
         UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
         if (oUsuarioEntity == null) {
@@ -141,7 +141,7 @@ public class CitaController {
                 return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
             }
         }
-    }
+    }*/
     
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody CitaEntity oCitaEntity) {
@@ -185,7 +185,7 @@ public class CitaController {
         }
     }
     
-    @GetMapping("/page")
+   /* @GetMapping("/page")
     public ResponseEntity<?> getPage(@PageableDefault(page = 0, size = 10, direction = Sort.Direction.ASC) Pageable oPageable) {
 
         UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
@@ -205,5 +205,5 @@ public class CitaController {
             }
         }
 
-    }
+    }*/
 }

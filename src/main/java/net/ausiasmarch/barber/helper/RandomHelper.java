@@ -1,6 +1,7 @@
 package net.ausiasmarch.barber.helper;
 
 import java.security.SecureRandom;
+import java.sql.Time;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -31,7 +32,7 @@ public class RandomHelper {
         return randomNum;
     }
 
-    public static Date getRadomDate() {
+    public static Date getRandomDate() {
         GregorianCalendar gc = new GregorianCalendar();
         int year = getRandomInt(2010, 2019);
         gc.set(gc.YEAR, year);

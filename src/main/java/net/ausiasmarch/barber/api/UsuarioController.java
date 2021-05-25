@@ -87,6 +87,7 @@ public class UsuarioController {
                 return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
             }
         }
+    //return new ResponseEntity<List<UsuarioEntity>>(oUsuarioRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -108,6 +109,11 @@ public class UsuarioController {
                 return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
             }
         }
+    }
+    
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody UsuarioEntity oUsuarioEntity) {
+        return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.save(oUsuarioEntity), HttpStatus.OK);
     }
 
     @GetMapping("/count")

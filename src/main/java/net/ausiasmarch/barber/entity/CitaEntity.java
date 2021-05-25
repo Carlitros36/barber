@@ -12,8 +12,9 @@ package net.ausiasmarch.barber.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,9 +40,12 @@ import javax.persistence.Table;
     @Column(name = "id")
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime fecha;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date fecha;
 
+    @JsonFormat(pattern = "hh:mm:ss")
+    private Time hora;
+    
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "usuario_id")
     private UsuarioEntity usuario;
@@ -64,12 +68,20 @@ import javax.persistence.Table;
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+    
+    public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
     public UsuarioEntity getUsuario() {

@@ -46,8 +46,9 @@ public class UsuarioEntity implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = {CascadeType.REFRESH})
     private List<CitaEntity> citas = new ArrayList<>();
     
-    /*@JsonIgnore
+    @JsonIgnore
     private String token;
+    /*
     @JsonIgnore
     private boolean validado;
     @JsonIgnore
@@ -116,14 +117,14 @@ public class UsuarioEntity implements Serializable {
         this.email = email;
     }
 
-  /*  public String getToken() {
+    public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
     }
-
+/*
     public boolean isValidado() {
         return validado;
     }

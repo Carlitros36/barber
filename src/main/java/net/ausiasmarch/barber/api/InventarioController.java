@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import net.ausiasmarch.barber.entity.InventarioEntity;
 import net.ausiasmarch.barber.entity.UsuarioEntity;
 import net.ausiasmarch.barber.repository.InventarioRepository;
+import net.ausiasmarch.barber.service.FillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,8 @@ public class InventarioController {
     @Autowired
     InventarioRepository oInventarioRepository;
     
+    @Autowired
+    FillService oFillService;
     
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable(value = "id") Long id) {
@@ -50,11 +53,23 @@ public class InventarioController {
     
     @GetMapping("/all")
     public ResponseEntity<?> all() {
+               
+        UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+    
+        if (oUsuarioEntity == null) {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        } else {
+            
+            if (oUsuarioEntity.getTipousuario().getId() == 1) {
         if (oInventarioRepository.count() <= 100) {
             return new ResponseEntity<List<InventarioEntity>>(oInventarioRepository.findAll(), HttpStatus.OK);
         } else {
+                    return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
+                }
+        } else {
             return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
         }
+      }
     }
     
     @GetMapping("/count")
@@ -74,6 +89,20 @@ public class InventarioController {
                 } else {
                     return new ResponseEntity<Long>(0L, HttpStatus.NOT_MODIFIED);
                 }
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+            }
+        }
+    }
+    
+    @PostMapping("/fill/{amount}")
+    public ResponseEntity<?> fill(@PathVariable(value = "amount") Long amount) {
+        UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        if (oUsuarioEntity == null) {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        } else {
+            if (oUsuarioEntity.getTipousuario().getId() == 1) {
+                return new ResponseEntity<Long>(oFillService.InventarioFill(amount), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
             }

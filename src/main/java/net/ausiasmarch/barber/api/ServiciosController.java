@@ -50,10 +50,16 @@ public class ServiciosController {
     
     @GetMapping("/all")
     public ResponseEntity<?> all() {
-        if (oServiciosRepository.count() <= 1000) {
-            return new ResponseEntity<List<ServiciosEntity>>(oServiciosRepository.findAll(), HttpStatus.OK);
+        UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+
+        if (oUsuarioEntity == null) {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
+                if (oServiciosRepository.count() <= 1000) {
+                    return new ResponseEntity<List<ServiciosEntity>>(oServiciosRepository.findAll(), HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
+                }
         }
     }
     
