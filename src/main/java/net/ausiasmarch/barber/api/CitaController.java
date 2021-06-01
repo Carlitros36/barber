@@ -112,23 +112,31 @@ public class CitaController {
     
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody CitaEntity oCitaEntity) {
+       
 
         UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
         if (oUsuarioEntity == null) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         } else {
-            if (oUsuarioEntity.getTipousuario().getId() == 1) {
+            if (oUsuarioEntity.getTipousuario().getId() == 1) { //es admin
                 if (oCitaEntity.getId() == null) {
-                    return new ResponseEntity<CitaEntity>(oCitaRepository.save(oCitaEntity), HttpStatus.OK);
+                    return new ResponseEntity<CitaEntity>(oCitaRepository.save(oCitaEntity), HttpStatus.OK);//crea la cita
                 } else {
                     return new ResponseEntity<Long>(0L, HttpStatus.NOT_MODIFIED);
                 }
             } else {
-                return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+                if (oCitaEntity.getUsuario().getId().equals(oUsuarioEntity.getId())) {//es una cita para el usuario en cuestión?
+                    if (oCitaEntity.getId() == null) {
+                        return new ResponseEntity<CitaEntity>(oCitaRepository.save(oCitaEntity), HttpStatus.OK);
+                    } else {
+                        return new ResponseEntity<Long>(0L, HttpStatus.NOT_MODIFIED);
+                    }
+                } else {
+                    return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+                }
             }
         }
     }
-    
     /*@PostMapping("/fill/{amount}")
     public ResponseEntity<?> fill(@PathVariable(value = "amount") Long amount) {
         UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");

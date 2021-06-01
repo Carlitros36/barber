@@ -89,6 +89,13 @@ public class UsuarioController {
         }
     //return new ResponseEntity<List<UsuarioEntity>>(oUsuarioRepository.findAll(), HttpStatus.OK);
     }
+    
+    @GetMapping("/allCitas")
+    public ResponseEntity<?> getUsuarioCita(){
+    
+        return new ResponseEntity<List<UsuarioEntity>>(oUsuarioRepository.findUsuarioCita(), HttpStatus.OK);
+        
+    }
 
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody UsuarioEntity oNewUsuarioEntity) {

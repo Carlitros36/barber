@@ -77,8 +77,8 @@ public class FillService {
             oUsuarioEntity.setEmail(nombre + apellido1.charAt(0) + "@ausiasmarch.net");
             TipousuarioEntity oTipousuarioEntity = new TipousuarioEntity();
             oTipousuarioEntity.setId(2L);
-            oUsuarioEntity.setTipousuario(oTipousuarioEntity);
-            oUsuarioEntity.setToken("");/*
+            oUsuarioEntity.setTipousuario(oTipousuarioEntity);/*
+            oUsuarioEntity.setToken("");
             oUsuarioEntity.setValidado(true);
             oUsuarioEntity.setActivo(true);*/
 

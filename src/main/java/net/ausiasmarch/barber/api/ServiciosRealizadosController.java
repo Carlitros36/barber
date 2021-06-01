@@ -95,7 +95,7 @@ public class ServiciosRealizadosController {
     @GetMapping("/all")
     public ResponseEntity<?> all() {
         UsuarioEntity oUsuarioEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
-
+        
         if (oUsuarioEntity == null) {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         } else {
@@ -107,7 +107,7 @@ public class ServiciosRealizadosController {
                     return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
                 }
             } else {
-                return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
+               return new ResponseEntity<>(null, HttpStatus.PAYLOAD_TOO_LARGE);
             }
         }
     }

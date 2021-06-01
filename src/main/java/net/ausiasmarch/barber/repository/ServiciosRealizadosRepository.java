@@ -5,6 +5,7 @@
  */
 package net.ausiasmarch.barber.repository;
 
+import java.util.List;
 import net.ausiasmarch.barber.entity.ServiciosRealizadosEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

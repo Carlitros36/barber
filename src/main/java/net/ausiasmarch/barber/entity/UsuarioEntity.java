@@ -2,6 +2,8 @@ package net.ausiasmarch.barber.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +43,16 @@ public class UsuarioEntity implements Serializable {
     
     @ManyToOne(fetch=FetchType.EAGER, cascade={CascadeType.REFRESH})
     @JoinColumn(name="tipousuario_id")
+    @JsonProperty(access = Access.READ_ONLY)
     private TipousuarioEntity tipousuario;
     
+    @JsonProperty(access = Access.READ_ONLY)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = {CascadeType.REFRESH})
     private List<CitaEntity> citas = new ArrayList<>();
     
-    @JsonIgnore
+    /*@JsonIgnore
     private String token;
-    /*
+    
     @JsonIgnore
     private boolean validado;
     @JsonIgnore
@@ -117,14 +121,14 @@ public class UsuarioEntity implements Serializable {
         this.email = email;
     }
 
-    public String getToken() {
+   /* public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
     }
-/*
+
     public boolean isValidado() {
         return validado;
     }

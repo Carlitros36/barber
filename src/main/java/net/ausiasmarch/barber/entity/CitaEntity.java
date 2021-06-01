@@ -11,6 +11,8 @@ package net.ausiasmarch.barber.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
     @Entity
     @Table(name = "cita")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -40,7 +43,7 @@ import javax.persistence.Table;
     @Column(name = "id")
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+   @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
     @JsonFormat(pattern = "hh:mm:ss")
