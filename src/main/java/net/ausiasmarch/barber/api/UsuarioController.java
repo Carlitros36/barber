@@ -119,8 +119,16 @@ public class UsuarioController {
     }
     
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UsuarioEntity oUsuarioEntity) {
-        return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.save(oUsuarioEntity), HttpStatus.OK);
+    public ResponseEntity<?> register(@RequestBody UsuarioEntity oNewUsuarioEntity) {
+        
+      //  if (oNewUsuarioEntity.getId() == null) {
+                    TipousuarioEntity oTipousuarioEntity = new TipousuarioEntity();
+                    oTipousuarioEntity.setId(2L);
+                    oNewUsuarioEntity.setTipousuario(oTipousuarioEntity);
+                    return new ResponseEntity<UsuarioEntity>(oUsuarioRepository.save(oNewUsuarioEntity), HttpStatus.OK);
+             /*   } else {
+                    return new ResponseEntity<Long>(0L, HttpStatus.NOT_MODIFIED);
+                }*/
     }
 
     @GetMapping("/count")

@@ -36,7 +36,6 @@ public class UsuarioEntity implements Serializable {
     private String apellido2;
     private String login;
     
-    @JsonIgnore
     private String password;
     
     private String email;

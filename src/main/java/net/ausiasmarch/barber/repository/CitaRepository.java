@@ -18,9 +18,6 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface CitaRepository extends JpaRepository<CitaEntity, Long>{
     
-    /*@Query(value = "SELECT * FROM cita c WHERE c.usuario_id = :id_usuario", nativeQuery = true)
-    Page<CitaEntity> findByCitaXUsuario(Long id_usuario, Pageable pageable);
-    */
     @Query(value = "SELECT * FROM cita c WHERE c.usuario_id = :id_usuario", nativeQuery = true)
     List<CitaEntity> findByCitaXUsuario(Long id_usuario);
 }
